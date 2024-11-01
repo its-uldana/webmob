@@ -1,17 +1,25 @@
-import React from "react";
-import './todo-list-item.css';
+import React from 'react';
 
-const TodoListItem = ({ label, important = false }) => {
+import TodoListItem from './todo-list-item';
+import './todo-list.css';
 
-    const style = {
-        color: important ? 'tomato' : 'black'
-    };
+const TodoList = ({ todos }) => {
+
+    const elements = todos.map((item) => {
+        const { id, ...itemProps } = item;
+
+        return (
+            <li key={id} className="list-group-item">
+                <TodoListItem {...itemProps } />
+            </li>
+        );
+    });
+
     return (
-        <span className={ "todo-list-item" }
-                 style={ style }>
-            { label }
-    </span>
+        <ul className="list-group todo-list">
+            { elements }
+        </ul>
     );
 };
 
-export default TodoListItem;
+export default TodoList;
